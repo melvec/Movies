@@ -12,7 +12,7 @@ import {
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import { MovieCard } from "./MovieCard";
 
-const links = ["Home", "Movies", "Wishlist"];
+const links = ["Home", "Wishlist"];
 
 const NavLink = ({ children, onClick }) => (
   <Link

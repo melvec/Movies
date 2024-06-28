@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import NavLink from "./NavLink";
+
 import {
   Box,
   Flex,
@@ -14,34 +16,14 @@ import { MovieCard } from "./MovieCard";
 
 const links = ["Home", "Wishlist"];
 
-const NavLink = ({ children, onClick }) => (
-  <Link
-    px={2}
-    py={1}
-    rounded={"md"}
-    _hover={{
-      textDecoration: "none",
-      bg: "gray.200",
-    }}
-    href={"#"}
-    onClick={onClick}
-  >
-    {children}
-  </Link>
-);
-
-const Navbar = ({ wishlistOfMovies }) => {
+const Navbar = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [activeLink, setActiveLink] = useState("Home");
 
-  const handleNavClick = (link) => {
-    setActiveLink(link);
-    if (isOpen) onClose(); // Close the menu on small screens when a link is clicked
-  };
+  const { activeLink, handleNavClick } = props;
 
   return (
     <>
-      <Box bg="teal.800" px={4}>
+      <Box bg="black" px={4}>
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
           <IconButton
             size={"md"}
@@ -60,7 +42,11 @@ const Navbar = ({ wishlistOfMovies }) => {
               display={{ base: "none", md: "flex" }}
             >
               {links.map((link) => (
-                <NavLink key={link} onClick={() => handleNavClick(link)}>
+                <NavLink
+                  key={link}
+                  onClick={() => handleNavClick(link)}
+                  isActive={activeLink === link}
+                >
                   {link}
                 </NavLink>
               ))}
@@ -72,25 +58,17 @@ const Navbar = ({ wishlistOfMovies }) => {
           <Box pb={4} display={{ md: "none" }}>
             <Stack as={"nav"} spacing={4}>
               {links.map((link) => (
-                <NavLink key={link} onClick={() => handleNavClick(link)}>
+                <NavLink
+                  key={link}
+                  onClick={() => handleNavClick(link)}
+                  isActive={activeLink === link}
+                >
                   {link}
                 </NavLink>
               ))}
             </Stack>
           </Box>
         ) : null}
-      </Box>
-
-      <Box p={4}>
-        {activeLink === "Wishlist" ? (
-          wishlistOfMovies && wishlistOfMovies.length > 0 ? (
-            <MovieCard listOfMovies={wishlistOfMovies} />
-          ) : (
-            <Text>No movies in wishlist.</Text>
-          )
-        ) : (
-          <Text>{activeLink} Content </Text>
-        )}
       </Box>
     </>
   );

@@ -1,7 +1,11 @@
 import React from "react";
 import { Box, Image, Text, Stack, Center, Button } from "@chakra-ui/react";
 
-export const MovieCard = ({ listOfMovies, addMovieToWishlist }) => {
+export const MovieCard = ({
+  listOfMovies,
+  toggleMovieToWishlist,
+  wishlistOfMovies,
+}) => {
   return (
     <Center>
       <Stack spacing={4} direction="row" wrap="wrap" justify="center">
@@ -9,33 +13,36 @@ export const MovieCard = ({ listOfMovies, addMovieToWishlist }) => {
           listOfMovies.map((item) => (
             <Box
               key={item.id}
-              maxW="sm"
+              maxW="xs"
               borderWidth="1px"
               borderRadius="lg"
               overflow="hidden"
-              p="6"
-              m="4"
+              p="2"
+              m="2"
               boxShadow="lg"
             >
-              <Image src={item.i.imageUrl} alt={item.l} borderRadius="md" />
-              <Box p="6">
+              <Text>{item.id}</Text>
+              <Image
+                src={item.i.imageUrl}
+                alt={item.l}
+                borderRadius="md"
+                objectFit="contain" // Alternative value to cover
+              />
+              <Box p="2">
+                {" "}
                 <Box d="flex" alignItems="baseline">
-                  <Text
-                    mt="1"
-                    fontWeight="semibold"
-                    as="h3"
-                    lineHeight="tight"
-                    isTruncated
-                  >
+                  <Text mt="1" fontWeight="semibold" as="h3">
                     {item.l}
                   </Text>
                 </Box>
                 <Button
                   mt="2"
                   colorScheme="teal"
-                  onClick={() => addMovieToWishlist(item)}
+                  onClick={() => toggleMovieToWishlist(item)}
                 >
-                  Add to Wishlist
+                  {wishlistOfMovies.find((movie) => movie.id === item.id)
+                    ? "Remove from Wishlist"
+                    : "Add to Wishlist"}
                 </Button>
               </Box>
             </Box>

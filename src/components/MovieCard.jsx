@@ -23,7 +23,7 @@ export const MovieCard = ({
             >
               <Text>{item.id}</Text>
               <Image
-                src={item.i.imageUrl}
+                src={item.poster_path}
                 alt={item.l}
                 borderRadius="md"
                 objectFit="contain" // Alternative value to cover
@@ -32,7 +32,7 @@ export const MovieCard = ({
                 {" "}
                 <Box d="flex" alignItems="baseline">
                   <Text mt="1" fontWeight="semibold" as="h3">
-                    {item.l}
+                    {item.original_title}
                   </Text>
                 </Box>
                 <Button

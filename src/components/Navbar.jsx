@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import NavLink from "./NavLink";
+import SearchInput from "./SearchInput";
 
 import {
   Box,
@@ -19,7 +20,7 @@ const links = ["Home", "Wishlist"];
 const Navbar = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const { activeLink, handleNavClick } = props;
+  const { activeLink, handleNavClick, onSearch } = props;
 
   return (
     <>
@@ -36,6 +37,7 @@ const Navbar = (props) => {
             <Box color="white" fontWeight="bold" fontSize="lg">
               MyMovieApp
             </Box>
+            <SearchInput onSearch={onSearch} />
             <HStack
               as={"nav"}
               spacing={4}

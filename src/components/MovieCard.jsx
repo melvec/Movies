@@ -23,7 +23,7 @@ export const MovieCard = ({
             >
               <Text>{item.id}</Text>
               <Image
-                src={item.poster_path}
+                src={"https://image.tmdb.org/t/p/original" + item.poster_path}
                 alt={item.l}
                 borderRadius="md"
                 objectFit="contain" // Alternative value to cover

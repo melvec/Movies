@@ -26,7 +26,6 @@ export const MainContainer = () => {
     axios
       .request(options)
       .then(function (response) {
-        console.log(response.data.results);
         setListOfMovies(response.data.results);
       })
       .catch(function (error) {
